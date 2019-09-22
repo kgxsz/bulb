@@ -1,0 +1,2 @@
+{:main bulb.core
+ :output-to "resources/public/js/app.js"}
