@@ -3,12 +3,15 @@
         com.bhauman/figwheel-main {:mvn/version "0.2.3"}
         gardener {:local/root "../gardener"}}
  :paths ["src" "target" "resources"]
- :aliases {:garden-dev {:main-opts ["--main" "gardener.compiler"
+ :aliases {:gardener-dev {:main-opts ["--main" "gardener.compiler"
                                     "--stylesheet" "bulb.styles.core/core"
                                     "--output-to" "resources/public/css/index.css"
                                     "--watch" "src/bulb/styles"
                                     "--pretty-print" "true"]}
-           :garden-prod {:main-opts ["--main" "gardener.compiler"
+           :gardener-prod {:main-opts ["--main" "gardener.compiler"
                                      "--stylesheet" "bulb.styles.core/core"
                                      "--output-to" "resources/public/css/index.css"
-                                     "--build-once" "true"]}}}
+                                     "--build-once" "true"]}
+           :figwheel-prod {:main-opts ["--main" "figwheel.main"
+                                       "--build-once" "prod"]}
+           :figwheel-serve {:main-opts ["--main" "figwheel.main" "--serve"]}}}

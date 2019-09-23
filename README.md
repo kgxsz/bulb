@@ -8,10 +8,10 @@
 - To kick off a repl from within emacs: `C-c M-J`:
   - Then specify `figwheel-main`.
   - Then specify the `dev` build.
-- To kick off an auto reloading Garden flow: `clj -Agarden-dev` 
+- To kick off an auto reloading Garden flow: `clj -Agardener-dev` 
 
 ## Build a deployable artifact
 - Ensure the `resources/css/` and `resources/js/` directories are empty.
-- To build an optimised `index.js` file: `clj --main figwheel.main -bo prod`
-- To build an optimised `index.css` file: `clj -Agarden-prod`
-- To serve the app: `clj -m figwheel.main -s`
+- To build an optimised `index.js` file: `clj -Afigwheel-prod`
+- To build an optimised `index.css` file: `clj -Agardener-prod`
+- To serve the app: `clj -Afigwheel-serve`
