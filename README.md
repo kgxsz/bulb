@@ -4,8 +4,8 @@
 
 ## Local development setup
 
-- To kick off a repl from the command line: `clj --main figwheel.main -b dev -r`.
-- To kick off a repl from within emacs: `C-c M-J`:
+- To kick off a repl from the command line: `clj -Afigwheel-dev`.
+- Alternatively, to kick off a repl from within emacs: `C-c M-J`:
   - Then specify `figwheel-main`.
   - Then specify the `dev` build.
 - To kick off an auto reloading Garden flow: `clj -Agardener-dev` 

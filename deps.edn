@@ -12,6 +12,9 @@
                                      "--stylesheet" "bulb.styles.core/core"
                                      "--output-to" "resources/public/css/index.css"
                                      "--build-once" "true"]}
+           :figwheel-dev {:main-opts ["--main" "figwheel.main"
+                                      "--build" "dev"
+                                      "--repl"]}
            :figwheel-prod {:main-opts ["--main" "figwheel.main"
                                        "--build-once" "prod"]}
            :figwheel-serve {:main-opts ["--main" "figwheel.main" "--serve"]}}}
