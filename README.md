@@ -12,5 +12,5 @@
 
 ## Build a deployable artifact
 - To build an optimised `index.js` file: `clj --main figwheel.main -bo prod`
-- To build an optimised `index.css` file: `clj --main gardener.compiler --stylesheet bulb.styles.core/core --output-to resources/public/css/index.css --build-once true
+- To build an optimised `index.css` file: `clj --main gardener.compiler --stylesheet bulb.styles.core/core --output-to resources/public/css/index.css --build-once true`
 - To serve the app: `clj -m figwheel.main -s`
