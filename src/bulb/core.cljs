@@ -1,14 +1,19 @@
-(ns bulb.core
+(ns ^:figwheel-hooks bulb.core
   (:require [reagent.core :as reagent]
             [re-frame.core :as re-frame]
-            [bulb.views.app :refer [app]]))
+            [bulb.effects :as effects]
+            [bulb.events :as events]
+            [bulb.subscriptions :as subscriptions]
+            [bulb.views.app :as app]))
 
 
-(defn mount []
+(defn ^:after-load mount []
   (re-frame/clear-subscription-cache!)
-  (reagent/render [app]
+  (reagent/render [app/app]
                   (.getElementById js/document "core")))
 
 
-(enable-console-print!)
-(mount)
+(defn ^:export initialise []
+  (enable-console-print!)
+  (re-frame/dispatch-sync [:initialise])
+  (mount))
