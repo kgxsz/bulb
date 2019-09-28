@@ -7,8 +7,9 @@
  :initialise
  [interceptors/schema interceptors/log]
  (fn [{:keys [db]} event]
-   {:db {:authorised? false}
-    :start-history []}))
+   {:db {:authorised? false
+         :route :unknown}
+    :start-history nil}))
 
 
 (re-frame/reg-event-fx

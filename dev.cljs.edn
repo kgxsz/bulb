@@ -1,5 +1,5 @@
-^{:ring-handler bulb.server/handler
+^{:ring-handler server/handler
   :css-dirs ["resources/public/css"]}
 {:main bulb.core
- :preloads [bulb.preloads]
+ :preloads [preloads]
  :output-to "resources/public/js/index.js"}

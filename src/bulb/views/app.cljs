@@ -12,7 +12,7 @@
     "toggle!"]
    [:button
     {:on-click route}
-    "route!"]])
+    "route!!"]])
 
 
 (defn app []
