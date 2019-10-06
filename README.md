@@ -10,8 +10,9 @@
   - Then specify the `dev` build.
 - To kick off an auto reloading Garden flow: `clj -Agardener-dev` 
 
-## Build a deployable artifact
+## Build and deploying an artifact
 - Ensure the `resources/css/` and `resources/js/` directories are empty.
 - To build an optimised `index.js` file: `clj -Afigwheel-prod`
 - To build an optimised `index.css` file: `clj -Agardener-prod`
-- To serve the app: `clj -Afigwheel-serve`
+- To serve the app locally: `clj -Afigwheel-serve`
+- To deploy the artifact: `firebase deploy`
