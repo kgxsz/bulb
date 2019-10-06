@@ -7,10 +7,11 @@
             [bulb.views.app :as app]))
 
 
+
 (defn ^:after-load mount []
   (re-frame/clear-subscription-cache!)
   (reagent/render [app/app]
-                  (.getElementById js/document "core")))
+                  (.getElementById js/document "app-container")))
 
 
 (defn ^:export initialise []

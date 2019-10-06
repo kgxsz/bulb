@@ -7,16 +7,12 @@
  :initialise
  [interceptors/schema interceptors/log]
  (fn [{:keys [db]} event]
-   {:db {:authorised? false
-         :route :unknown}
-    :start-history nil}))
-
-
-(re-frame/reg-event-fx
- :toggle
- [interceptors/schema interceptors/log]
- (fn [{:keys [db]} [_]]
-   {:db (update db :authorised? not)}))
+   {:db {:routing-initialised? false
+         :authorised? false
+         :route :unknown
+         :route-params {}
+         :query-params {}}
+    :initialise-routing nil}))
 
 
 (re-frame/reg-event-fx
@@ -24,13 +20,14 @@
  [interceptors/schema interceptors/log]
  (fn [{:keys [db]} [_ {:keys [route route-params query-params]}]]
    {:db (-> db
+            (assoc :routing-initialised? true)
             (assoc :route route)
             (assoc :route-params route-params)
             (assoc :query-params query-params))}))
 
 
 (re-frame/reg-event-fx
- :go-to-home-page
+ :authorise
  [interceptors/schema interceptors/log]
  (fn [{:keys [db]} [_]]
-   {:update-history [:home]}))
+   {:redirect {:url "https://github.com/login/oauth/authorize?client_id=8d06f025e5fbd7809f2b"}}))
