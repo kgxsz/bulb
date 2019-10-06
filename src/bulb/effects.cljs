@@ -14,7 +14,7 @@
            (pushy/pushy
             #(re-frame/dispatch
               [:route {:route (::silk/name %)
-                       :route-params (->> (select-keys % [:username])
+                       :route-params (->> (medley.core/remove-keys namespace %)
                                           (medley/map-vals string/lower-case))
                        :query-params (->> % ::silk/url :query (medley/map-keys keyword))}])
             #(or (silk/arrive routing/routes %)
@@ -32,5 +32,3 @@
  :redirect
  (fn [{:keys [url]}]
    (set! js/window.location url)))
-
-; For examples: https://github.com/kgxsz/sloth/blob/master/src/main/app/navigation.cljs
