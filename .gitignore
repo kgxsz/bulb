@@ -14,3 +14,6 @@ resources/public/js
 .lein-failures
 .nrepl-port
 .cpcache/
+
+# Firebase
+.firebase
