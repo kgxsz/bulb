@@ -31,3 +31,43 @@
  [interceptors/schema interceptors/log]
  (fn [{:keys [db]} [_]]
    {:redirect {:url "https://github.com/login/oauth/authorize?client_id=8d06f025e5fbd7809f2b"}}))
+
+
+(re-frame/reg-event-fx
+ :query-success
+ [interceptors/schema]
+ (fn [{:keys [db]} [_ query response]]
+   (js/console.warn "QUERY SUCCESS!")
+   {:db db}))
+
+
+(re-frame/reg-event-fx
+ :query-failure
+ [interceptors/schema]
+ (fn [{:keys [db]} [_ query response]]
+   (js/console.warn "QUERY FAILURE!")
+   {:db db}))
+
+
+(re-frame/reg-event-fx
+ :command-success
+ [interceptors/schema]
+ (fn [{:keys [db]} [_ command response]]
+   (js/console.warn "COMMAND SUCCESS!")
+   {:db db}))
+
+
+(re-frame/reg-event-fx
+ :command-failure
+ [interceptors/schema]
+ (fn [{:keys [db]} [_ command response]]
+   (js/console.warn "COMMAND FAILURE!")
+   {:db db}))
+
+
+;; Get a constructed URL backend
+;; Redirect to that URL
+;; Get redirected
+;; Send the code and state to the backend via a command
+;; Get a session back
+;; Query for the user goods

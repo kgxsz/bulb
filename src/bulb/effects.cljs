@@ -1,5 +1,6 @@
 (ns bulb.effects
   (:require [bulb.routing :as routing]
+            [ajax.core :as ajax]
             [re-frame.core :as re-frame]
             [domkm.silk :as silk]
             [pushy.core :as pushy]
@@ -32,3 +33,28 @@
  :redirect
  (fn [{:keys [url]}]
    (set! js/window.location url)))
+
+
+(re-frame/reg-fx
+ :query
+ (fn [query]
+   (ajax/POST "https://api.kaizen.keigo.io/query"
+              {:params query
+               :format :json
+               :handler (fn [response]
+                          (re-frame/dispatch [:query-success query response]))
+               :error-handler (fn [response] (re-frame/dispatch [:query-failure query response]))
+               #_:response-format #_(ajax/transit-response-format {:handlers {"u" ->UUID}})})))
+
+
+(re-frame/reg-fx
+ :command
+ (fn [command]
+   (ajax/POST "https://api.kaizen.keigo.io/command"
+              {:params command
+               :format :json
+               :handler (fn [response] (re-frame/dispatch [:command-success command response]))
+               :error-handler (fn [response] (re-frame/dispatch [:command-failure command response]))
+               #_:response-format #_(ajax/transit-response-format {:handlers {"u" ->UUID}})})))
+
+
