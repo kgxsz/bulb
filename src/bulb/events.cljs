@@ -19,26 +19,34 @@
  :route
  [interceptors/schema interceptors/log]
  (fn [{:keys [db]} [_ {:keys [route route-params query-params]}]]
-   {:db (-> db
-            (assoc :routing-initialised? true)
-            (assoc :route route)
-            (assoc :route-params route-params)
-            (assoc :query-params query-params))}))
+   (let [db (-> db
+                (assoc :routing-initialised? true)
+                (assoc :route route)
+                (assoc :route-params route-params)
+                (assoc :query-params query-params))]
+     (case route
+       :home {:db db}
+       :authorise {:query {:profile {}}}
+       {:db db}))))
 
 
 (re-frame/reg-event-fx
  :authorise
  [interceptors/schema interceptors/log]
  (fn [{:keys [db]} [_]]
-   {:redirect {:url "https://github.com/login/oauth/authorize?client_id=8d06f025e5fbd7809f2b"}}))
+   {:query {:authorisation {}}}))
 
 
 (re-frame/reg-event-fx
  :query-success
  [interceptors/schema]
  (fn [{:keys [db]} [_ query response]]
-   (js/console.warn "QUERY SUCCESS!")
-   {:db db}))
+   (js/console.warn "QUERY SUCCESS!" query)
+   (case (-> query keys first)
+     :authorisation {:redirect {:url (get response "url")}}
+     :profile {:update-route {:route :home}
+               :db (assoc db :authorised? true)}
+     {:db db})))
 
 
 (re-frame/reg-event-fx
@@ -63,11 +71,3 @@
  (fn [{:keys [db]} [_ command response]]
    (js/console.warn "COMMAND FAILURE!")
    {:db db}))
-
-
-;; Get a constructed URL backend
-;; Redirect to that URL
-;; Get redirected
-;; Send the code and state to the backend via a command
-;; Get a session back
-;; Query for the user goods

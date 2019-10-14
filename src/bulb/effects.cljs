@@ -25,7 +25,7 @@
 
 (re-frame/reg-fx
  :update-route
- (fn [{:keys [host route route-params query-params]}]
+ (fn [{:keys [route route-params query-params]}]
    (pushy/set-token! @routing/!history (silk/depart routing/routes route (or route-params {})))))
 
 
