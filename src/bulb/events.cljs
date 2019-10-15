@@ -26,7 +26,8 @@
                 (assoc :query-params query-params))]
      (case route
        :home {:db db}
-       :authorise {:query {:profile {}}}
+       :authorise {:db db
+                   :query {:profile {}}}
        {:db db}))))
 
 
