@@ -1,4 +1,4 @@
-(ns bulb.views.app
+(ns bulb.views.core
   (:require [re-frame.core :as re-frame]))
 
 
@@ -6,7 +6,7 @@
             {:keys [authorise]}]
   (if routing-initialised?
     [:div
-     {:class "app"}
+     {:class "core"}
      (case route
        :home [:div
               "Hi there!"
@@ -22,11 +22,11 @@
        :unknown [:div
                  "Something is wrong"])]
     [:div
-     {:class "app"}
+     {:class "core"}
      "Not ready"]))
 
 
-(defn app []
+(defn core []
   (let [!routing-initialised? (re-frame/subscribe [:routing-initialised?])
         !route (re-frame/subscribe [:route])
         !authorised? (re-frame/subscribe [:authorised?])]

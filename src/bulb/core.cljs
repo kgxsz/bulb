@@ -4,14 +4,13 @@
             [bulb.effects :as effects]
             [bulb.events :as events]
             [bulb.subscriptions :as subscriptions]
-            [bulb.views.app :as app]))
+            [bulb.views.core :as core]))
 
 
 
 (defn ^:after-load mount []
   (re-frame/clear-subscription-cache!)
-  (reagent/render [app/app]
-                  (.getElementById js/document "app-container")))
+  (reagent/render [core/core] (.getElementById js/document "container")))
 
 
 (defn ^:export initialise []
