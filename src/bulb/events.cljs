@@ -1,6 +1,8 @@
 (ns bulb.events
   (:require [re-frame.core :as re-frame]
-            [bulb.interceptors :as interceptors]))
+            [bulb.interceptors :as interceptors]
+            [goog.string :as gstring]
+            [goog.string.format]))
 
 
 (re-frame/reg-event-fx
@@ -43,7 +45,11 @@
  [interceptors/schema]
  (fn [{:keys [db]} [_ query response]]
    (case (-> query keys first)
-     :authorisation-details {:redirect {:url (get response "url")}}
+     :authorisation-details (let [client-id (:client-id response)
+                                  host "https://github.com"
+                                  path "login/oauth/authorize"
+                                  query-params (gstring/format "client_id=%s" client-id)]
+                              {:redirect {:url (gstring/format "%s/%s?%s" host path query-params)}})
      {})))
 
 
@@ -51,7 +57,7 @@
  :query-failure
  [interceptors/schema]
  (fn [{:keys [db]} [_ query response]]
-   (js/console.warn "QUERY FAILURE!")
+   (js/console.warn "QUERY FAILURE!" response)
    {:db db}))
 
 
@@ -70,5 +76,5 @@
  :command-failure
  [interceptors/schema]
  (fn [{:keys [db]} [_ command response]]
-   (js/console.warn "COMMAND FAILURE!")
+   (js/console.warn "COMMAND FAILURE!" response)
    {:db db}))

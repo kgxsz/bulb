@@ -40,11 +40,10 @@
  (fn [query]
    (ajax/POST "https://api.kaizen.keigo.io/query"
               {:params query
-               :format :json
                :handler (fn [response]
                           (re-frame/dispatch [:query-success query response]))
-               :error-handler (fn [response] (re-frame/dispatch [:query-failure query response]))
-               #_:response-format #_(ajax/transit-response-format {:handlers {"u" ->UUID}})})))
+               :error-handler (fn [{:keys [response]}] (re-frame/dispatch [:query-failure query response]))
+               :response-format (ajax/transit-response-format {:handlers {"u" ->UUID}})})))
 
 
 (re-frame/reg-fx
@@ -52,9 +51,8 @@
  (fn [command]
    (ajax/POST "https://api.kaizen.keigo.io/command"
               {:params command
-               :format :json
                :handler (fn [response] (re-frame/dispatch [:command-success command response]))
-               :error-handler (fn [response] (re-frame/dispatch [:command-failure command response]))
-               #_:response-format #_(ajax/transit-response-format {:handlers {"u" ->UUID}})})))
+               :error-handler (fn [{:keys [response]}] (re-frame/dispatch [:command-failure command response]))
+               :response-format (ajax/transit-response-format {:handlers {"u" ->UUID}})})))
 
 
