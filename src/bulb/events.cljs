@@ -27,12 +27,12 @@
      (case route
        :home {:db db}
        :authorisation {:db db
-                       :command {:authorise (select-keys query-params [:code])}}
+                       :command {:verify-authorisation (select-keys query-params [:code])}}
        {:db db}))))
 
 
 (re-frame/reg-event-fx
- :authorise
+ :initialise-authorisation
  [interceptors/schema interceptors/log]
  (fn [{:keys [db]} [_]]
    {:query {:authorisation-details {}}}))
@@ -61,8 +61,8 @@
  (fn [{:keys [db]} [_ command response]]
    (js/console.warn "COMMAND SUCCESS!")
    (case (-> command keys first)
-     :authorise {:db (assoc db :authorised? true)
-                 :update-route {:route :home}}
+     :verify-authorisation {:db (assoc db :authorised? true)
+                            :update-route {:route :home}}
      {})))
 
 

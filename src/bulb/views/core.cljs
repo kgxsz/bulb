@@ -3,18 +3,19 @@
 
 
 (defn view [{:keys [routing-initialised? route authorised?]}
-            {:keys [authorise]}]
+            {:keys [initialise-authorisation]}]
   (if routing-initialised?
     [:div
      {:class "core"}
      (case route
        :home [:div
               "Hi there!"
-              [:div
-               (if authorised? "authed" "not authed")]
-              [:button
-               {:on-click authorise}
-               "authorise"]]
+              (if authorised?
+                [:div
+                 "authed"]
+                [:button
+                 {:on-click initialise-authorisation}
+                 "authorise"])]
        :user [:div
               "You're a user!"]
        :authorisation [:div
@@ -35,4 +36,4 @@
        {:routing-initialised? @!routing-initialised?
         :route @!route
         :authorised? @!authorised?}
-       {:authorise #(re-frame/dispatch [:authorise])}])))
+       {:initialise-authorisation #(re-frame/dispatch [:initialise-authorisation])}])))
