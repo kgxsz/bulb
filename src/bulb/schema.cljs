@@ -8,7 +8,7 @@
 
 (s/def ::authorised? boolean?)
 
-(s/def ::route #{:home :user :authorise :unknown})
+(s/def ::route #{:home :user :authorisation :unknown})
 
 (s/def ::route-params map?)
 

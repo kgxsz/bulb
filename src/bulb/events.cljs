@@ -26,8 +26,8 @@
                 (assoc :query-params query-params))]
      (case route
        :home {:db db}
-       :authorise {:db db
-                   :query {:profile {}}}
+       :authorisation {:db db
+                       :command {:authorise (select-keys query-params [:code])}}
        {:db db}))))
 
 
@@ -35,7 +35,7 @@
  :authorise
  [interceptors/schema interceptors/log]
  (fn [{:keys [db]} [_]]
-   {:query {:authorisation {}}}))
+   {:query {:authorisation-details {}}}))
 
 
 (re-frame/reg-event-fx
@@ -44,10 +44,8 @@
  (fn [{:keys [db]} [_ query response]]
    (js/console.warn "QUERY SUCCESS!" query)
    (case (-> query keys first)
-     :authorisation {:redirect {:url (get response "url")}}
-     :profile {:update-route {:route :home}
-               :db (assoc db :authorised? true)}
-     {:db db})))
+     :authorisation-details {:redirect {:url (get response "url")}}
+     {})))
 
 
 (re-frame/reg-event-fx
@@ -63,7 +61,10 @@
  [interceptors/schema]
  (fn [{:keys [db]} [_ command response]]
    (js/console.warn "COMMAND SUCCESS!")
-   {:db db}))
+   (case (-> command keys first)
+     :authorise {:db (assoc db :authorised? true)
+                 :update-route {:route :home}}
+     {})))
 
 
 (re-frame/reg-event-fx

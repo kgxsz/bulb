@@ -17,8 +17,8 @@
                "authorise"]]
        :user [:div
               "You're a user!"]
-       :authorise [:div
-                   "authorising"]
+       :authorisation [:div
+                       "authorising"]
        :unknown [:div
                  "Something is wrong"])]
     [:div

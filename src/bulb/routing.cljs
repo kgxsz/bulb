@@ -7,4 +7,4 @@
 
 (def routes (silk/routes [[:home [[]]]
                           [:user [["user" :username]]]
-                          [:authorise [["authorise"]]]]))
+                          [:authorisation [["authorisation"]]]]))
