@@ -42,7 +42,6 @@
  :query-success
  [interceptors/schema]
  (fn [{:keys [db]} [_ query response]]
-   (js/console.warn "QUERY SUCCESS!" query)
    (case (-> query keys first)
      :authorisation-details {:redirect {:url (get response "url")}}
      {})))
