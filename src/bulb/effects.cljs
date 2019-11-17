@@ -40,6 +40,7 @@
  (fn [query]
    (ajax/POST "https://api.kaizen.keigo.io/query"
               {:params query
+               :with-credentials true
                :handler (fn [response]
                           (re-frame/dispatch [:query-success query response]))
                :error-handler (fn [{:keys [response]}] (re-frame/dispatch [:query-failure query response]))
@@ -51,6 +52,7 @@
  (fn [command]
    (ajax/POST "https://api.kaizen.keigo.io/command"
               {:params command
+               :with-credentials true
                :handler (fn [response] (re-frame/dispatch [:command-success command response]))
                :error-handler (fn [{:keys [response]}] (re-frame/dispatch [:command-failure command response]))
                :response-format (ajax/transit-response-format {:handlers {"u" ->UUID}})})))
