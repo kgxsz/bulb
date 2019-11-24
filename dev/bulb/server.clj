@@ -1,4 +1,4 @@
-(ns server
+(ns bulb.server
   (:require [ring.middleware.resource :as middleware]))
 
 (defn handler [request]

@@ -1,3 +1,3 @@
-(ns preloads)
+(ns bulb.preloads)
 
 (enable-console-print!)

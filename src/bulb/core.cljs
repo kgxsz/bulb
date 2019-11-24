@@ -7,7 +7,6 @@
             [bulb.views.core :as core]))
 
 
-
 (defn ^:after-load mount []
   (re-frame/clear-subscription-cache!)
   (reagent/render [core/core] (.getElementById js/document "container")))
