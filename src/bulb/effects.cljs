@@ -1,5 +1,6 @@
 (ns bulb.effects
   (:require [bulb.routing :as routing]
+            [bulb.utils :as utils]
             [ajax.core :as ajax]
             [re-frame.core :as re-frame]
             [domkm.silk :as silk]
@@ -38,7 +39,7 @@
 (re-frame/reg-fx
  :query
  (fn [query]
-   (ajax/POST "https://api.kaizen.keigo.io/query"
+   (ajax/POST (utils/make-url :query)
               {:params query
                :with-credentials true
                :handler (fn [response]
@@ -50,7 +51,7 @@
 (re-frame/reg-fx
  :command
  (fn [command]
-   (ajax/POST "https://api.kaizen.keigo.io/command"
+   (ajax/POST (utils/make-url :command)
               {:params command
                :with-credentials true
                :handler (fn [response] (re-frame/dispatch [:command-success command response]))
