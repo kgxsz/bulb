@@ -3,7 +3,6 @@
 #### A repository to mess around with Re-frame.
 
 ## Local development setup
-
 - To kick off a repl from the command line: `clj -Afigwheel-dev`.
 - Alternatively, to kick off a repl from within emacs: `C-c M-J`:
   - Then specify `figwheel-main`.
