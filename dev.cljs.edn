@@ -1,4 +1,5 @@
 ^{:ring-handler bulb.server/handler
+  :ring-server-options {:port 8080}
   :css-dirs ["resources/public/css"]}
 {:main bulb.core
  :preloads [bulb.preloads]
