@@ -28,8 +28,10 @@
                  {:on-click authorise}
                  "authorise"])]
       :user [:div
-             {:class (u/bem [:text])}
-             "You're a user!"]
+             {:class (u/bem [:cell :margin-top-x-huge])}
+             [:div
+              {:class (u/bem [:text :align-center :font-size-large])}
+              "hello user"]]
       :authorisation [:div
                       {:class (u/bem [:cell :margin-top-x-huge])}
                       [:div
@@ -39,12 +41,12 @@
                 {:class (u/bem [:cell :margin-top-x-huge])}
                 [:div
                  {:class (u/bem [:text :align-center :font-size-large])}
-                 "Something is wrong."]]
+                 "something is wrong"]]
       [:div
        {:class (u/bem [:cell :margin-top-x-huge])}
        [:div
         {:class (u/bem [:text :align-center :font-size-large])}
-        "Loading"]])]])
+        "loading"]])]])
 
 
 (defn core []
