@@ -4,8 +4,6 @@
             [medley.core :as medley]))
 
 
-(s/def ::routing-initialised? boolean?)
-
 (s/def ::authorised? boolean?)
 
 (s/def ::route #{:home :user :authorisation :unknown})
@@ -15,9 +13,7 @@
 (s/def ::query-params map?)
 
 
-(s/def ::db (s/keys :req-un [::routing-initialised?
-                             ::authorised?
-                             ::route
+(s/def ::db (s/keys :req-un [::authorised?]
+                    :opt-un [::route
                              ::route-params
-                             ::query-params]
-                    :opt-un []))
+                             ::query-params]))

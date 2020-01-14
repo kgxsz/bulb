@@ -9,12 +9,8 @@
  :initialise
  [interceptors/schema interceptors/log]
  (fn [{:keys [db]} event]
-   {:db {:routing-initialised? false
-         :authorised? false
-         :route :unknown
-         :route-params {}
-         :query-params {}}
-    :initialise-routing nil}))
+   {:db {:authorised? false}
+    :initialise-routing true}))
 
 
 (re-frame/reg-event-fx
@@ -22,22 +18,14 @@
  [interceptors/schema interceptors/log]
  (fn [{:keys [db]} [_ {:keys [route route-params query-params]}]]
    (let [db (-> db
-                (assoc :routing-initialised? true)
                 (assoc :route route)
                 (assoc :route-params route-params)
                 (assoc :query-params query-params))]
      (case route
        :home {:db db}
        :authorisation {:db db
-                       :command {:verify-authorisation (select-keys query-params [:code])}}
+                       :command {:authorise (select-keys query-params [:code])}}
        {:db db}))))
-
-
-(re-frame/reg-event-fx
- :initialise-authorisation
- [interceptors/schema interceptors/log]
- (fn [{:keys [db]} [_]]
-   {:query {:authorisation-details {}}}))
 
 
 (re-frame/reg-event-fx
@@ -67,8 +55,8 @@
  (fn [{:keys [db]} [_ command response]]
    (js/console.warn "COMMAND SUCCESS!")
    (case (-> command keys first)
-     :verify-authorisation {:db (assoc db :authorised? true)
-                            :update-route {:route :home}}
+     :authorise {:db (assoc db :authorised? true)
+                 :update-route {:route :home}}
      {})))
 
 
@@ -78,3 +66,26 @@
  (fn [{:keys [db]} [_ command response]]
    (js/console.warn "COMMAND FAILURE!" response)
    {:db db}))
+
+
+(re-frame/reg-event-fx
+ :authorise
+ [interceptors/schema interceptors/log]
+ (fn [{:keys [db]} [_]]
+   {:query {:authorisation-details {}}}))
+
+
+(re-frame/reg-event-fx
+ :deauthorise
+ [interceptors/schema interceptors/log]
+ (fn [{:keys [db]} [_]]
+   {:command {:deauthorise {}}
+    :db (assoc db :authorised? false)}))
+
+
+(re-frame/reg-event-fx
+ :get-profile
+ [interceptors/schema interceptors/log]
+ (fn [{:keys [db]} [_]]
+   {:query {:profile {}}}))
+
