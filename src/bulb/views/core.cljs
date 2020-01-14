@@ -31,11 +31,15 @@
              {:class (u/bem [:text])}
              "You're a user!"]
       :authorisation [:div
-                      {:class (u/bem [:text])}
-                      "authorising"]
+                      {:class (u/bem [:cell :margin-top-x-huge])}
+                      [:div
+                       {:class (u/bem [:text :align-center :font-size-large])}
+                       "authorising"]]
       :unknown [:div
-                {:class (u/bem [:text])}
-                "Something is wrong"]
+                {:class (u/bem [:cell :margin-top-x-huge])}
+                [:div
+                 {:class (u/bem [:text :align-center :font-size-large])}
+                 "Something is wrong."]]
       [:div
        {:class (u/bem [:cell :margin-top-x-huge])}
        [:div
