@@ -8,6 +8,7 @@
         kibu/pushy {:mvn/version "0.3.8"}
         com.bhauman/figwheel-main {:mvn/version "0.2.3"}
         com.cemerick/url {:mvn/version "0.1.1"}
+        com.powernoodle/normalize {:mvn/version "8.0.1"}
         gardener {:local/root "../gardener"}}
  :paths ["dev" "src" "target" "resources"]
  :aliases {:gardener-dev {:main-opts ["--main" "gardener.compiler"
