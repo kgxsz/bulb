@@ -7,15 +7,16 @@
 
 (re-frame/reg-event-fx
  :initialise
- [interceptors/schema interceptors/log]
+ [interceptors/log interceptors/schema]
  (fn [{:keys [db]} event]
-   {:db {:authorised? false}
-    :initialise-routing true}))
+   {:db {}
+    :initialise-routing {}
+    :command {:initialise {}}}))
 
 
 (re-frame/reg-event-fx
  :route
- [interceptors/schema interceptors/log]
+ [interceptors/log interceptors/schema]
  (fn [{:keys [db]} [_ {:keys [route route-params query-params]}]]
    (let [db (-> db
                 (assoc :route route)
@@ -30,7 +31,7 @@
 
 (re-frame/reg-event-fx
  :query-success
- [interceptors/schema]
+ [interceptors/log interceptors/schema interceptors/current-user-id]
  (fn [{:keys [db]} [_ query response]]
    (case (-> query keys first)
      :authorisation-details (let [client-id (:client-id response)
@@ -38,6 +39,9 @@
                                   path "login/oauth/authorize"
                                   query-params (gstring/format "client_id=%s" client-id)]
                               {:redirect {:url (gstring/format "%s/%s?%s" host path query-params)}})
+     :profile (let [{:keys [profile]} response]
+                (js/console.warn profile)
+                {:db (assoc-in db [:profiles (:user-id profile)] profile)})
      {})))
 
 
@@ -45,18 +49,17 @@
  :query-failure
  [interceptors/schema]
  (fn [{:keys [db]} [_ query response]]
-   (js/console.warn "QUERY FAILURE!" response)
-   {:db db}))
+   (js/console.warn "QUERY FAILURE!" response)))
 
 
 (re-frame/reg-event-fx
  :command-success
- [interceptors/schema]
+ [interceptors/log interceptors/schema interceptors/current-user-id]
  (fn [{:keys [db]} [_ command response]]
-   (js/console.warn "COMMAND SUCCESS!")
    (case (-> command keys first)
-     :authorise {:db (assoc db :authorised? true)
-                 :update-route {:route :home}}
+     :authorise {:update-route {:route :home}}
+     :initialise (when-let [current-user-id (:current-user-id db)]
+                   {:query {:profile {:user-id current-user-id}}})
      {})))
 
 
@@ -64,28 +67,18 @@
  :command-failure
  [interceptors/schema]
  (fn [{:keys [db]} [_ command response]]
-   (js/console.warn "COMMAND FAILURE!" response)
-   {:db db}))
+   (js/console.warn "COMMAND FAILURE!" response)))
 
 
 (re-frame/reg-event-fx
  :authorise
- [interceptors/schema interceptors/log]
+ [interceptors/log interceptors/schema]
  (fn [{:keys [db]} [_]]
    {:query {:authorisation-details {}}}))
 
 
 (re-frame/reg-event-fx
  :deauthorise
- [interceptors/schema interceptors/log]
+ [interceptors/log interceptors/schema]
  (fn [{:keys [db]} [_]]
-   {:command {:deauthorise {}}
-    :db (assoc db :authorised? false)}))
-
-
-(re-frame/reg-event-fx
- :get-profile
- [interceptors/schema interceptors/log]
- (fn [{:keys [db]} [_]]
-   {:query {:profile {}}}))
-
+   {:command {:deauthorise {}}}))
