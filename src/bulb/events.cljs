@@ -40,7 +40,6 @@
                                   query-params (gstring/format "client_id=%s" client-id)]
                               {:redirect {:url (gstring/format "%s/%s?%s" host path query-params)}})
      :profile (let [{:keys [profile]} response]
-                (js/console.warn profile)
                 {:db (assoc-in db [:profiles (:user-id profile)] profile)})
      {})))
 
