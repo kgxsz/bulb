@@ -4,7 +4,7 @@
             [medley.core :as medley]))
 
 
-(s/def ::authorised? boolean?)
+(s/def ::current-user-id (s/nilable int?))
 
 (s/def ::route #{:home :user :authorisation :unknown})
 
@@ -13,7 +13,9 @@
 (s/def ::query-params map?)
 
 
-(s/def ::db (s/keys :req-un [::authorised?]
-                    :opt-un [::route
+(s/def ::db (s/keys :req-un []
+                    :opt-un [::current-user-id
+                             ::route
                              ::route-params
                              ::query-params]))
+
