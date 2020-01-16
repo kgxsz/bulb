@@ -45,7 +45,7 @@
                :handler (fn [response]
                           (re-frame/dispatch [:query-success query response]))
                :error-handler (fn [{:keys [response]}] (re-frame/dispatch [:query-failure query response]))
-               :response-format (ajax/transit-response-format {:handlers {"u" ->UUID}})})))
+               :response-format (ajax/transit-response-format {:handlers {"u" ->UUID "n" long}})})))
 
 
 (re-frame/reg-fx
@@ -56,6 +56,6 @@
                :with-credentials true
                :handler (fn [response] (re-frame/dispatch [:command-success command response]))
                :error-handler (fn [{:keys [response]}] (re-frame/dispatch [:command-failure command response]))
-               :response-format (ajax/transit-response-format {:handlers {"u" ->UUID}})})))
+               :response-format (ajax/transit-response-format {:handlers {"u" ->UUID "n" long}})})))
 
 
