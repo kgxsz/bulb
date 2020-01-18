@@ -5,8 +5,7 @@
 
 (defstyles notification
   [:.notification
-   {:z-index -1
-    :border-bottom :solid
+   {:border-bottom :solid
     :border-width (px (:xx-tiny c/filling))}
 
    [:&--success
@@ -22,4 +21,7 @@
    [:&--error
     {:background-color (:red-one c/colour)
      :border-color (:red-two c/colour)
-     :color (:red-two c/colour)}]])
+     :color (:red-two c/colour)}]
+
+   [:&--background
+    {:z-index -1}]])

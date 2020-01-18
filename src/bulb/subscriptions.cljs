@@ -18,6 +18,12 @@
 
 
 (re-frame/reg-sub
+ :error?
+ (fn [db [_]]
+   (:error? db)))
+
+
+(re-frame/reg-sub
  :route
  (fn [db [_]]
    (:route db)))

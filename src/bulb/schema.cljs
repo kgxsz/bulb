@@ -12,10 +12,12 @@
 
 (s/def ::query-params map?)
 
+(s/def ::error? boolean?)
+
 
 (s/def ::db (s/keys :req-un []
                     :opt-un [::current-user-id
                              ::route
                              ::route-params
-                             ::query-params]))
-
+                             ::query-params
+                             ::error?]))

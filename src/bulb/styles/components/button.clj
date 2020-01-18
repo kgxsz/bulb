@@ -15,9 +15,5 @@
      :opacity (:10 c/fraction)}]
 
    [:&--primary
-    {:color (:white-one c/colour)
-     :background-color (:black-two c/colour)}]
-
-   [:&--secondary
     {:color (:black-two c/colour)
-     :background-color (:white-one c/colour)}]])
+     :border-color (:black-two c/colour)}]])

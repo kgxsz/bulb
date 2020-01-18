@@ -3,9 +3,9 @@
             [bulb.utils :as u]))
 
 
-(defn view [{:keys [type icon title paragraph]}]
+(defn view [{:keys [type background? icon title paragraph]}]
   [:div
-   {:class (u/bem [:notification type]
+   {:class (u/bem [:notification type (when background? :background)]
                   [:cell :fixed :column :width-cover :height-huge :padding-left-small :padding-right-small])}
    [:div
     {:class (u/bem [:cell :row :align-baseline])}
@@ -31,7 +31,7 @@
           :title (clojure.string/upper-case (name type)))])
 
 
-(defn error-notification []
+(defn error-notification [properties]
   [notification
-   {:type :error
-    :paragraph "This application requires a larger browser window."}])
+   (assoc properties
+          :type :error)])

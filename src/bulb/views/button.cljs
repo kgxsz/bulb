@@ -25,10 +25,3 @@
    (assoc properties
           :type :primary)
    behaviours])
-
-
-(defn secondary-button [properties behaviours]
-  [button
-   (assoc properties
-          :type :secondary)
-   behaviours])

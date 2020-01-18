@@ -48,7 +48,7 @@
  :query-failure
  [interceptors/schema]
  (fn [{:keys [db]} [_ query response]]
-   (js/console.warn "QUERY FAILURE!" response)))
+   {:db (assoc db :error? true)}))
 
 
 (re-frame/reg-event-fx
@@ -68,7 +68,7 @@
  :command-failure
  [interceptors/schema]
  (fn [{:keys [db]} [_ command response]]
-   (js/console.warn "COMMAND FAILURE!" response)))
+   {:db (assoc db :error? true)}))
 
 
 (re-frame/reg-event-fx
