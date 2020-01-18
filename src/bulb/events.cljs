@@ -56,7 +56,9 @@
  [interceptors/log interceptors/schema interceptors/current-user-id]
  (fn [{:keys [db]} [_ command response]]
    (case (-> command keys first)
-     :authorise {:update-route {:route :home}}
+     :authorise (when-let [current-user-id (:current-user-id db)]
+                  {:query {:profile {:user-id current-user-id}}
+                   :update-route {:route :home}})
      :initialise (when-let [current-user-id (:current-user-id db)]
                    {:query {:profile {:user-id current-user-id}}})
      {})))

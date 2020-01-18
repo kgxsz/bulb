@@ -30,8 +30,6 @@
                     {:on-click deauthorise}]
                    [:div
                     {:class (u/bem [:text :align-center :font-size-large])}
-                    ;; This is loading for now, but eventually this would be
-                    ;; some kind of ghost item for the profile
                     "loading"])
                  [primary-button
                   {:label "Authorise"}
@@ -47,7 +45,7 @@
                         {:class (u/bem [:cell :margin-top-x-huge])}
                         [:div
                          {:class (u/bem [:text :align-center :font-size-large])}
-                         "authorising"]]
+                         "loading"]]
         :unknown [:div
                   {:class (u/bem [:cell :margin-top-x-huge])}
                   [:div
@@ -79,5 +77,5 @@
 ;; Query for the profile if authed - DONE
 ;; Fix the transit tagged issue - DONE
 ;; Don't finish loading home page until the full profile is fetched - DONE
-;; Fix the dual command on auth issue - TODO
+;; Fix the dual command on auth issue - DONE
 ;; Error messages for any unexpected outcomes - TODO
