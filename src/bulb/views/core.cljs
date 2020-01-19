@@ -5,7 +5,7 @@
             [bulb.utils :as u]))
 
 
-(defn view [{:keys [initialising? authorised? error? route profile]}
+(defn view [{:keys [initialising? authorised? authorising? deauthorising? error? route profile]}
             {:keys [error-notification primary-button]}
             {:keys [authorise deauthorise]}]
   [:div
@@ -31,13 +31,17 @@
                (if authorised?
                  (if (some? profile)
                    [primary-button
-                    {:label "Deauthorise"}
+                    {:icon :exit
+                     :label "Sign out"
+                     :working? deauthorising?}
                     {:on-click deauthorise}]
                    [:div
                     {:class (u/bem [:text :align-center :font-size-large])}
                     "loading"])
                  [primary-button
-                  {:label "Authorise"}
+                  {:icon :github
+                   :label "Sign in"
+                   :working? authorising?}
                   {:on-click authorise}])
                [:div
                 (str profile)]]
@@ -61,6 +65,8 @@
 (defn core []
   (let [!initialising? (re-frame/subscribe [:initialising?])
         !authorised? (re-frame/subscribe [:authorised?])
+        !authorising? (re-frame/subscribe [:authorising?])
+        !deauthorising? (re-frame/subscribe [:deauthorising?])
         !error? (re-frame/subscribe [:error?])
         !route (re-frame/subscribe [:route])
         !profile (re-frame/subscribe [:profile])]
@@ -68,6 +74,8 @@
       [view
        {:initialising? @!initialising?
         :authorised? @!authorised?
+        :authorising? @!authorising?
+        :deauthorising? @!deauthorising?
         :error? @!error?
         :route @!route
         :profile @!profile}
@@ -86,4 +94,6 @@
 ;; Don't finish loading home page until the full profile is fetched - DONE
 ;; Fix the dual command on auth issue - DONE
 ;; Error messages for any unexpected outcomes - DONE
-;; Authorise 
+;; Deal with grids when not authorised
+;; Button and page reactions on signal
+;; Data model for grids

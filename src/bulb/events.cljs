@@ -27,7 +27,7 @@
        :grids {:db db
                :query {:profile {}
                        :grids {}}}
-       :authorisation {:db db
+       :authorisation {:db (assoc db :authorising? true)
                        :command {:authorise (select-keys query-params [:code])}}
        :unknown {:db db
                  :query {:profile {}}}
@@ -61,7 +61,10 @@
  [interceptors/log interceptors/schema interceptors/current-user-id]
  (fn [{:keys [db]} [_ command response]]
    (case (-> command keys first)
-     :authorise {:update-route {:route :home}}
+     :authorise {:db (assoc db :authorising? false)
+                 :update-route {:route :home}}
+     :deauthorise {:db (assoc db :deauthorising? false)
+                   :update-route {:route :home}}
      {})))
 
 
@@ -76,11 +79,13 @@
  :authorise
  [interceptors/log interceptors/schema]
  (fn [{:keys [db]} [_]]
-   {:query {:authorisation-details {}}}))
+   {:db (assoc db :authorising? true)
+    :query {:authorisation-details {}}}))
 
 
 (re-frame/reg-event-fx
  :deauthorise
  [interceptors/log interceptors/schema]
  (fn [{:keys [db]} [_]]
-   {:command {:deauthorise {}}}))
+   {:db (assoc db :deauthorising? true)
+    :command {:deauthorise {}}}))

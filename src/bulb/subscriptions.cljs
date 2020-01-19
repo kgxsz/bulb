@@ -5,9 +5,10 @@
 (re-frame/reg-sub
  :initialising?
  (fn [db [_]]
-   (let [routing-initialised? (contains? db :route)
-         current-user-id-received? (contains? db :current-user-id)]
-     (not (and routing-initialised? current-user-id-received?)))))
+   (let [routing-not-initialised? (not (contains? db :route))
+         current-user-id-not-received? (not (contains? db :current-user-id))]
+     (or routing-not-initialised?
+         current-user-id-not-received?))))
 
 
 (re-frame/reg-sub
@@ -15,6 +16,18 @@
  (fn [db [_]]
    (when (contains? db :current-user-id)
      (some? (:current-user-id db)))))
+
+
+(re-frame/reg-sub
+ :authorising?
+ (fn [db [_]]
+   (:authorising? db)))
+
+
+(re-frame/reg-sub
+ :deauthorising?
+ (fn [db [_]]
+   (:deauthorising? db)))
 
 
 (re-frame/reg-sub
