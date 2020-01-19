@@ -6,7 +6,7 @@
 
 (s/def ::current-user-id (s/nilable int?))
 
-(s/def ::route #{:home :user :authorisation :unknown})
+(s/def ::route #{:home :grids :authorisation :unknown})
 
 (s/def ::route-params map?)
 

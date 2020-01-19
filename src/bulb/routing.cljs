@@ -6,5 +6,5 @@
 (defonce !history (atom nil))
 
 (def routes (silk/routes [[:home [[]]]
-                          [:user [["user" :username]]]
+                          [:grids [["grids"]]]
                           [:authorisation [["authorisation"]]]]))

@@ -24,8 +24,13 @@
      (case route
        :home {:db db
               :query {:profile {}}}
+       :grids {:db db
+               :query {:profile {}
+                       :grids {}}}
        :authorisation {:db db
                        :command {:authorise (select-keys query-params [:code])}}
+       :unknown {:db db
+                 :query {:profile {}}}
        {:db db}))))
 
 
