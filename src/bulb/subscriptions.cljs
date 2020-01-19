@@ -30,6 +30,6 @@
 
 
 (re-frame/reg-sub
- :current-user-profile
+ :profile
  (fn [db [_]]
    (get-in db [:profiles (:current-user-id db)])))

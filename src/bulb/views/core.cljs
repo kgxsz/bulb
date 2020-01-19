@@ -5,7 +5,7 @@
             [bulb.utils :as u]))
 
 
-(defn view [{:keys [initialising? authorised? error? route current-user-profile]}
+(defn view [{:keys [initialising? authorised? error? route profile]}
             {:keys [error-notification primary-button]}
             {:keys [authorise deauthorise]}]
   [:div
@@ -29,7 +29,7 @@
         :home [:div
                {:class (u/bem [:cell :column :margin-top-xx-huge])}
                (if authorised?
-                 (if current-user-profile
+                 (if (some? profile)
                    [primary-button
                     {:label "Deauthorise"}
                     {:on-click deauthorise}]
@@ -40,12 +40,12 @@
                   {:label "Authorise"}
                   {:on-click authorise}])
                [:div
-                (str current-user-profile)]]
-        :user [:div
-               {:class (u/bem [:cell :margin-top-xx-huge])}
-               [:div
-                {:class (u/bem [:text :align-center :font-size-large])}
-                "hello user"]]
+                (str profile)]]
+        :grids [:div
+                {:class (u/bem [:cell :margin-top-xx-huge])}
+                [:div
+                 {:class (u/bem [:text :align-center :font-size-large])}
+                 "GRIDS!"]]
         :authorisation [:div
                         {:class (u/bem [:cell :margin-top-xx-huge])}
                         [:div
@@ -63,14 +63,14 @@
         !authorised? (re-frame/subscribe [:authorised?])
         !error? (re-frame/subscribe [:error?])
         !route (re-frame/subscribe [:route])
-        !current-user-profile (re-frame/subscribe [:current-user-profile])]
+        !profile (re-frame/subscribe [:profile])]
     (fn []
       [view
        {:initialising? @!initialising?
         :authorised? @!authorised?
         :error? @!error?
         :route @!route
-        :current-user-profile @!current-user-profile}
+        :profile @!profile}
        {:error-notification notification/error-notification
         :primary-button button/primary-button}
        {:authorise #(re-frame/dispatch [:authorise])

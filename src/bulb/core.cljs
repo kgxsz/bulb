@@ -16,9 +16,3 @@
   (enable-console-print!)
   (re-frame/dispatch-sync [:initialise])
   (mount))
-
-;; initialisation page
-;; home page
-;; grids page
-;; authorisation page
-;; unknown page
