@@ -94,6 +94,8 @@
 ;; Don't finish loading home page until the full profile is fetched - DONE
 ;; Fix the dual command on auth issue - DONE
 ;; Error messages for any unexpected outcomes - DONE
-;; Deal with grids when not authorised
-;; Button and page reactions on signal
-;; Data model for grids
+;; Deal with grids when not authorised - TODO
+;; Button and page reactions on signal - DONE
+;; Add logo components and styling - TODO
+;; Clear down unwanted HTML items in index logo - TODO
+;; Look at favicon - TODO
