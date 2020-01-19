@@ -86,3 +86,4 @@
 ;; Don't finish loading home page until the full profile is fetched - DONE
 ;; Fix the dual command on auth issue - DONE
 ;; Error messages for any unexpected outcomes - DONE
+;; Authorise 

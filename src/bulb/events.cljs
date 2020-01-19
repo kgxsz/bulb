@@ -10,8 +10,7 @@
  [interceptors/log interceptors/schema]
  (fn [{:keys [db]} event]
    {:db {}
-    :initialise-routing {}
-    :command {:initialise {}}}))
+    :initialise-routing {}}))
 
 
 (re-frame/reg-event-fx
@@ -23,7 +22,8 @@
                 (assoc :route-params route-params)
                 (assoc :query-params query-params))]
      (case route
-       :home {:db db}
+       :home {:db db
+              :query {:profile {}}}
        :authorisation {:db db
                        :command {:authorise (select-keys query-params [:code])}}
        {:db db}))))
@@ -39,7 +39,7 @@
                                   path "login/oauth/authorize"
                                   query-params (gstring/format "client_id=%s" client-id)]
                               {:redirect {:url (gstring/format "%s/%s?%s" host path query-params)}})
-     :profile (let [{:keys [profile]} response]
+     :profile (when-let [profile (:profile response)]
                 {:db (assoc-in db [:profiles (:user-id profile)] profile)})
      {})))
 
@@ -56,11 +56,7 @@
  [interceptors/log interceptors/schema interceptors/current-user-id]
  (fn [{:keys [db]} [_ command response]]
    (case (-> command keys first)
-     :authorise (when-let [current-user-id (:current-user-id db)]
-                  {:query {:profile {:user-id current-user-id}}
-                   :update-route {:route :home}})
-     :initialise (when-let [current-user-id (:current-user-id db)]
-                   {:query {:profile {:user-id current-user-id}}})
+     :authorise {:update-route {:route :home}}
      {})))
 
 
