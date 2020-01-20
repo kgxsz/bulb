@@ -1,12 +1,13 @@
 (ns bulb.views.core
   (:require [re-frame.core :as re-frame]
             [bulb.views.notification :as notification]
+            [bulb.views.logo :as logo]
             [bulb.views.button :as button]
             [bulb.utils :as u]))
 
 
 (defn view [{:keys [initialising? authorised? authorising? deauthorising? error? route profile]}
-            {:keys [error-notification primary-button]}
+            {:keys [error-notification logo primary-button]}
             {:keys [authorise deauthorise]}]
   [:div
    {:class (u/bem [:core])}
@@ -19,12 +20,15 @@
    [:div
     {:class (u/bem [:page]
                    [:cell :overflow-auto :colour-white-one])}
-    (if initialising?
+    (if true ;initialising?
       [:div
-       {:class (u/bem [:cell :margin-top-xx-huge])}
+       {:class (u/bem [:cell :column :padding-top-x-huge])}
+       [logo]
        [:div
-        {:class (u/bem [:text :align-center :font-size-large])}
-        "loading"]]
+        {:class (u/bem [:cell :margin-top-xxx-large])}
+        [:div
+         {:class (u/bem [:text :align-center :font-size-large])}
+         "loading"]]]
       (case route
         :home [:div
                {:class (u/bem [:cell :column :margin-top-xx-huge])}
@@ -80,6 +84,7 @@
         :route @!route
         :profile @!profile}
        {:error-notification notification/error-notification
+        :logo logo/logo
         :primary-button button/primary-button}
        {:authorise #(re-frame/dispatch [:authorise])
         :deauthorise #(re-frame/dispatch [:deauthorise])}])))

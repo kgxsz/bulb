@@ -6,44 +6,55 @@
 (defn view []
   [:div
    {:class (u/bem [:logo]
-                  [:cell :width-xxx-large :height-xxx-large])}
+                  [:cell :width-xx-huge :height-xx-large])}
    [:svg
     {:xmlns "http://www.w3.org/2000/svg"
-     :viewBox "0 0 70 70"}
+     :viewBox "0 0 210 50"}
     [:g
-     {:transform "translate(-50 -171)"}
-     [:line
-      {:class (u/bem [:logo__line])
+     [:text
+      {:class (u/bem [:logo__text])
        :y1 "27"
-       :transform "translate(85 191)"}]
+       :transform "translate(27.5 31.5)"}
+      [:tspan
+       {:x "0"
+        :y "0"}
+       "KAIZEN"]]
      [:line
       {:class (u/bem [:logo__line])
-       :x2 "30"
-       :transform "translate(70 187.5)"}]
-     [:circle
-      {:class (u/bem [:logo__circle])
-       :cx "4.5"
-       :cy "4.5"
-       :r "4.5"
-       :transform "translate(80.5 183)"}]
-     [:circle
-      {:class (u/bem [:logo__circle])
-       :cx "4.5"
-       :cy "4.5"
-       :r "4.5"
-       :transform "translate(62 183)"}]
-     [:circle
-      {:class (u/bem [:logo__circle])
-       :cx "4.5"
-       :cy "4.5"
-       :r "4.5"
-       :transform "translate(80.5 216)"}]
-     [:circle
-      {:class (u/bem [:logo__circle])
-       :cx "4.5"
-       :cy "4.5"
-       :r "4.5"
-       :transform "translate(99 183)"}]]]])
+       :y2 "42"
+       :transform "translate(50 2)"}]
+     [:line
+      {:class (u/bem [:logo__line])
+       :y2 "42"
+       :transform "translate(80 4)"}]
+     [:line
+      {:class (u/bem [:logo__line])
+       :y2 "46"
+       :transform "translate(102 2)"}]
+     [:line
+      {:class (u/bem [:logo__line])
+       :y2 "40"
+       :transform "translate(130 4)"}]
+     [:line
+      {:class (u/bem [:logo__line])
+       :y2 "44"
+       :transform "translate(159 2)"}]
+     [:line
+      {:class (u/bem [:logo__line])
+       :y2 "42"
+       :transform "translate(19 4)"}]
+     [:line
+      {:class (u/bem [:logo__line])
+       :y2 "44"
+       :transform "translate(189 4)"}]
+     [:line
+      {:class (u/bem [:logo__line])
+       :x2 "182"
+       :transform "translate(14 39)"}]
+     [:line
+      {:class (u/bem [:logo__line])
+       :x2 "186"
+       :transform "translate(12 10)"}]]]])
 
 
 (defn logo []
