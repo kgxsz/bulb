@@ -5,6 +5,7 @@
             [bulb.styles.components.icon :refer [icon]]
             [bulb.styles.components.cell :refer [cell]]
             [bulb.styles.components.button :refer [button]]
+            [bulb.styles.components.logo :refer [logo]]
             [bulb.styles.components.page :refer [page]]
             [bulb.styles.components.notification :refer [notification]]
             [garden.def :refer [defstyles]]
@@ -54,6 +55,7 @@
   icon
   cell
   button
+  logo
   page
   notification
   )
