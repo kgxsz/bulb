@@ -117,6 +117,7 @@
    :95 0.95
    :100 0.1})
 
+
 (def font-size
   {:xx-tiny 7
    :x-tiny 8
@@ -130,7 +131,11 @@
    :x-large 16
    :xx-large 17
    :xxx-large 18
-   :huge 22
-   :x-huge 28
+   :huge 20
+   :x-huge 24
    :xx-huge 32
    :xxx-huge 40})
+
+
+(def logo
+  {:letter-spacing 16.5})
