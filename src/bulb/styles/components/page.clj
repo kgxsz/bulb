@@ -14,7 +14,7 @@
     {:display :none})
 
    (u/small-width
-    {:display :none})
+    {:display :block})
 
    (u/medium-width
     {:display :block})
