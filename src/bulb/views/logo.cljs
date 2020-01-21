@@ -13,7 +13,6 @@
     [:g
      [:text
       {:class (u/bem [:logo__text])
-       :y1 "27"
        :transform "translate(27.5 31.5)"}
       [:tspan
        {:x "0"
@@ -46,15 +45,7 @@
      [:line
       {:class (u/bem [:logo__line])
        :y2 "44"
-       :transform "translate(189 4)"}]
-     [:line
-      {:class (u/bem [:logo__line])
-       :x2 "182"
-       :transform "translate(14 39)"}]
-     [:line
-      {:class (u/bem [:logo__line])
-       :x2 "186"
-       :transform "translate(12 10)"}]]]])
+       :transform "translate(189 4)"}]]]])
 
 
 (defn logo []
