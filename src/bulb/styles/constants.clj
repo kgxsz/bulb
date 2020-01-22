@@ -10,7 +10,7 @@
    :grey-three "#D8D8D8"
    :white-one "#FFFFFF"
    :white-two "#FDFDFD"
-   :white-three "#F4F4F4"
+   :white-three "#F2F2F2"
    :green-one "#FBFDF8"
    :green-two "#8ACA55"
    :yellow-one "#FEFCF8"
@@ -68,7 +68,8 @@
    :small 2
    :medium 3
    :large 4
-   :huge 8})
+   :huge 8
+   :x-huge 20})
 
 (def proportion
   {:0 0
@@ -135,7 +136,3 @@
    :x-huge 24
    :xx-huge 32
    :xxx-huge 40})
-
-
-(def logo
-  {:letter-spacing 16.5})

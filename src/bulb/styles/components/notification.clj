@@ -10,18 +10,15 @@
 
    [:&--success
     {:background-color (:green-one c/colour)
-     :border-color (:green-two c/colour)
-     :color (:green-two c/colour)}]
+     :border-color (:green-two c/colour)}]
 
    [:&--warning
     {:background-color (:yellow-one c/colour)
-     :border-color (:yellow-two c/colour)
-     :color (:yellow-two c/colour)}]
+     :border-color (:yellow-two c/colour)}]
 
    [:&--error
     {:background-color (:red-one c/colour)
-     :border-color (:red-two c/colour)
-     :color (:red-two c/colour)}]
+     :border-color (:red-two c/colour)}]
 
    [:&--background
     {:z-index -1}]])

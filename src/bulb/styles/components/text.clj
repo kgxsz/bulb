@@ -6,10 +6,11 @@
 
 
 (defstyles text
-  [:.text {:font-family "\"Open Sans\", sans-serif"
+  [:.text {:font-family  "Arial, \"Helvetica Neue\", Helvetica, sans-serif"
            :font-size (px (:medium c/font-size))
            :font-weight 400
            :line-height 1.3
+           :color (:black-two c/colour)
            :font-variant :normal
            :text-transform :none
            :-webkit-font-smoothing :antialiased

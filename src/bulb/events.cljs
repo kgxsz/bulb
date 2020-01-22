@@ -89,3 +89,11 @@
  (fn [{:keys [db]} [_]]
    {:db (assoc db :deauthorising? true)
     :command {:deauthorise {}}}))
+
+
+(re-frame/reg-event-fx
+ :update-route
+ [interceptors/log interceptors/schema]
+ (fn [{:keys [db]} [_ route]]
+   {:update-route {:route route}}))
+

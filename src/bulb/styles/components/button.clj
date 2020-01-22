@@ -7,8 +7,7 @@
 
 (defstyles button
   [:.button
-   {:cursor :pointer
-    :border [[:solid (px (:xx-tiny c/filling)) (:black-two c/colour)]]}
+   {:cursor :pointer}
 
    [:&--working
     {:cursor :default}]
@@ -18,7 +17,15 @@
      :opacity (:10 c/fraction)}]
 
    [:&--primary
-    {:color (:black-two c/colour)
-     :border-color (:black-two c/colour)}
+    {:width (-> c/filling :huge px)
+     :min-width (-> c/filling :huge px)
+     :color (:black-two c/colour)
+     :border [[:solid (px (:xx-tiny c/filling)) (:black-two c/colour)]]
+     :border-radius (-> c/radius :x-huge px)}
     [:&:hover
-     {:background-color (:white-two c/colour)}]]])
+     {:background-color (:white-two c/colour)}]]
+
+   [:&--light
+    {:width (-> c/filling :x-large px)
+     :min-width (-> c/filling :x-large px)
+     :color (:black-two c/colour)}]])

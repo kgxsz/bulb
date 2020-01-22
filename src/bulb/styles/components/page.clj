@@ -8,7 +8,9 @@
 (defstyles page
   [:.page
    {:display :none
-    :min-height (vh (:100 c/proportion))}
+    :min-height (vh (:100 c/proportion))
+    :overflow :auto
+    :background-color (:white-one c/colour)}
 
    (u/tiny-width
     {:display :none})
@@ -23,4 +25,23 @@
     {:display :block})
 
    (u/huge-width
-    {:display :block})])
+    {:display :block})
+
+   [:&__contents
+    {:margin :auto
+     :padding (-> c/spacing :x-small px)
+     :display :flex
+     :flex-direction :column
+     :align-items :center}
+
+    (u/small-width
+     {:width (-> c/breakpoint :small :start px)})
+
+    (u/medium-width
+     {:width (-> c/breakpoint :medium :start px)})
+
+    (u/large-width
+     {:width (-> c/breakpoint :large :start px)})
+
+    (u/huge-width
+     {:width (-> c/breakpoint :huge :start px)})]])

@@ -7,6 +7,8 @@
 
 (defstyles logo
   [:.logo
+   {:width (-> c/filling :xx-huge px)
+    :height (-> c/filling :xx-large px)}
    [:&__line
     {:fill :none
      :stroke (:black-two c/colour)
@@ -14,6 +16,6 @@
    [:&__text
     {:fill (:black-two c/colour)
      :font-size (px (:huge c/font-size))
-     :font-family "\"Open Sans\", sans-serif"
+     :font-family "Arial, \"Helvetica Neue\", Helvetica, sans-serif"
      :font-weight :bold
-     :letter-spacing (px (:letter-spacing c/logo))}]])
+     :letter-spacing (px (:x-large c/font-size))}]])

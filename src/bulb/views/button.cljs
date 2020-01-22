@@ -7,13 +7,15 @@
             {:keys [on-click]}]
   [:div
    {:class (u/bem [:button type (when working? :working) (when disabled? :disabled)]
-                  [:cell :row :width-huge :height-x-large])
+                  [:cell :row :height-x-large])
     :on-click (when-not (or working? disabled?) on-click)}
-   [:div
-    {:class (u/bem [:icon icon :font-size-xxx-large])}]
-   [:div
-    {:class (u/bem [:text :font-size-medium :padding-left-xx-small])}
-    label]])
+   (when icon
+     [:div
+      {:class (u/bem [:icon icon :font-size-xxx-large])}])
+   (when label
+     [:div
+      {:class (u/bem [:text :font-size-medium :padding-left-xx-small])}
+      label])])
 
 
 (defn button [properties behaviours]
@@ -26,4 +28,11 @@
   [button
    (assoc properties
           :type :primary)
+   behaviours])
+
+
+(defn light-button [properties behaviours]
+  [button
+   (assoc properties
+          :type :light)
    behaviours])
