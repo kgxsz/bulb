@@ -10,7 +10,7 @@
   [:div
    {:class (u/bem [:page])}
    [:div
-    {:class (u/bem [:page__contents])}
+    {:class (u/bem [:page__body])}
     [:div
      {:class (u/bem [:cell :padding-top-x-huge])}
      [logo]]
@@ -22,7 +22,9 @@
      [primary-button
       {:icon :home
        :label "Leave"}
-      {:on-click update-route}]]]])
+      {:on-click update-route}]]]
+   [:div
+    {:class (u/bem [:page__footer])}]])
 
 
 (defn grids-page []

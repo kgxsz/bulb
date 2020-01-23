@@ -8,13 +8,15 @@
   [:div
    {:class (u/bem [:page])}
    [:div
-    {:class (u/bem [:page__contents])}
+    {:class (u/bem [:page__body])}
     [:div
      {:class (u/bem [:cell :padding-top-x-huge])}
      [logo]]
     [:div
      {:class (u/bem [:text :font-size-large :margin-top-xxx-large :padding-top-x-small])}
-     "loading"]]])
+     "loading"]]
+   [:div
+    {:class (u/bem [:page__footer])}]])
 
 
 (defn loading-page []

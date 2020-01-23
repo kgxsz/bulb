@@ -52,7 +52,7 @@
    :xx-large 50
    :xxx-large 70
    :huge 100
-   :x-huge 150
+   :x-huge 140
    :xx-huge 210
    :xxx-huge 270})
 

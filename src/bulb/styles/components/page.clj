@@ -27,7 +27,7 @@
    (u/huge-width
     {:display :block})
 
-   [:&__contents
+   [:&__body
     {:margin :auto
      :padding (-> c/spacing :x-small px)
      :display :flex
@@ -44,4 +44,7 @@
      {:width (-> c/breakpoint :large :start px)})
 
     (u/huge-width
-     {:width (-> c/breakpoint :huge :start px)})]])
+     {:width (-> c/breakpoint :huge :start px)})]
+
+   [:&__footer
+    {:height (-> c/filling :xx-large px)}]])

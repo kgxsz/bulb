@@ -7,6 +7,7 @@
             [bulb.styles.components.button :refer [button]]
             [bulb.styles.components.logo :refer [logo]]
             [bulb.styles.components.profile :refer [profile]]
+            [bulb.styles.components.grid :refer [grid]]
             [bulb.styles.components.page :refer [page]]
             [bulb.styles.components.notification :refer [notification]]
             [garden.def :refer [defstyles]]
@@ -58,6 +59,7 @@
   button
   logo
   profile
+  grid
   page
   notification
   )
