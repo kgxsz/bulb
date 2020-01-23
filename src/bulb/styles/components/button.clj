@@ -7,7 +7,12 @@
 
 (defstyles button
   [:.button
-   {:cursor :pointer}
+   {:display :flex
+    :flex-direction :row
+    :justify-content :center
+    :align-items :center
+    :height(-> c/filling :x-large px)
+    :cursor :pointer}
 
    [:&--working
     {:cursor :default}]

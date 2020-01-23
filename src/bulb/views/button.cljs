@@ -6,8 +6,7 @@
 (defn view [{:keys [type working? disabled? icon label]}
             {:keys [on-click]}]
   [:div
-   {:class (u/bem [:button type (when working? :working) (when disabled? :disabled)]
-                  [:cell :row :height-x-large])
+   {:class (u/bem [:button type (when working? :working) (when disabled? :disabled)])
     :on-click (when-not (or working? disabled?) on-click)}
    (when icon
      [:div
