@@ -5,8 +5,7 @@
 
 (defn view [{:keys [type colour background? icon title paragraph]}]
   [:div
-   {:class (u/bem [:notification type (when background? :background)]
-                  [:cell :fixed :column :width-cover :height-huge :padding-left-small :padding-right-small])}
+   {:class (u/bem [:notification type (when background? :background)])}
    [:div
     {:class (u/bem [:cell :row :align-baseline])}
     [:div

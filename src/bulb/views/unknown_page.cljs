@@ -17,7 +17,6 @@
     [:div
      {:class (u/bem [:text :font-size-large :margin-top-xxx-large :padding-top-x-small])}
      "this page doesn't exist"]
-    ;; TODO - add a button to go back to the home page
     [:div
      {:class (u/bem [:cell :margin-auto :margin-top-xxx-large])}
      [primary-button

@@ -5,7 +5,16 @@
 
 (defstyles notification
   [:.notification
-   {:border-bottom :solid
+   {:position :fixed
+    :display :flex
+    :flex-direction :column
+    :justify-content :center
+    :align-items :center
+    :width (-> c/proportion :100 percent)
+    :height (-> c/filling :huge px)
+    :padding-left (-> c/spacing :small px)
+    :padding-right (-> c/spacing :small px)
+    :border-bottom :solid
     :border-width (px (:xx-tiny c/filling))}
 
    [:&--success
