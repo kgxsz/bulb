@@ -3,12 +3,13 @@
             [bulb.views.notification :as notification]
             [bulb.views.loading-page :as loading-page]
             [bulb.views.home-page :as home-page]
+            [bulb.views.grids-page :as grids-page]
             [bulb.views.unknown-page :as unknown-page]
             [bulb.utils :as u]))
 
 
 (defn view [{:keys [initialising? error? route]}
-            {:keys [error-notification loading-page home-page unknown-page]}]
+            {:keys [error-notification loading-page home-page grids-page unknown-page]}]
   [:div
    {:class (u/bem [:core])}
    [error-notification
@@ -21,7 +22,7 @@
      [loading-page]
      (case route
        :home [home-page]
-       :grids [:div "TODO"]
+       :grids [grids-page]
        :authorisation [loading-page]
        :unknown [unknown-page]))])
 
@@ -38,4 +39,5 @@
        {:error-notification notification/error-notification
         :loading-page loading-page/loading-page
         :home-page home-page/home-page
+        :grids-page grids-page/grids-page
         :unknown-page unknown-page/unknown-page}])))
