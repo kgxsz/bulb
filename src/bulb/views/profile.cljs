@@ -25,8 +25,7 @@
        :working? deauthorising?}
       {:on-click deauthorise}]]
     [:div
-     {:class (u/bem [:text :align-center :font-size-large :padding-top-x-small])}
-     "ghost"]))
+     {:class (u/bem [:profile])}]))
 
 
 (defn profile []
