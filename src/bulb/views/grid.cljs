@@ -2,15 +2,29 @@
   (:require [re-frame.core :as re-frame]
             [bulb.views.logo :as logo]
             [bulb.views.button :as button]
-            [bulb.utils :as u]))
+            [bulb.utils :as u]
+            [cljs-time.core :as t]
+            [cljs-time.format :as t.format]
+            [cljs-time.periodic :as t.periodic]))
+
+
+(def date-label-formatter (t.format/formatter "EEEE do 'of' MMMM, Y"))
+
+
+(def dates
+  (let [today (t/today)]
+    (t.periodic/periodic-seq
+     (t/minus- today (t/days (+ 426 (t/day-of-week today))))
+     (t/plus- today (t/days 1))
+     (t/days 1))))
 
 
 (defn cells
-  []
-  (for [i (range 434)]
-    {:date (str i "th April, 2020")
-     :colour (rand-nth [:colour-grey-four :colour-white-three])
-     :disabled? (rand-nth [false true])}))
+  [dates]
+  (for [date dates]
+    {:date (t.format/unparse date-label-formatter date)
+     :colour (if (odd? (t/month date)) :colour-grey-four :colour-white-three)
+     :disabled? (t/before? date (t/minus- (last dates) (t/days 6)))}))
 
 
 (defn view [{:keys []}
@@ -37,7 +51,7 @@
       [:div
        {:class (u/bem [:grid__cells])}
        (doall
-        (for [{:keys [date colour disabled?]} (cells)]
+        (for [{:keys [date colour disabled?]} (cells dates)]
           [:div
            {:key date
             :title date
