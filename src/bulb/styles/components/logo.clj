@@ -9,10 +9,12 @@
   [:.logo
    {:width (-> c/filling :xx-huge px)
     :height (-> c/filling :xx-large px)}
+
    [:&__line
     {:fill :none
      :stroke (:black-two c/colour)
      :stroke-width (:xx-tiny c/filling)}]
+
    [:&__text
     {:fill (:black-two c/colour)
      :font-size (px (:huge c/font-size))

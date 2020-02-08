@@ -7,12 +7,15 @@
 
 (defstyles cell
   [:.cell
+
    [:&--fixed
     {:display :block
      :position :fixed}]
+
    [:&--absolute
     {:display :block
      :position :absolute}]
+
    [:&--relative
     {:display :block
      :position :relative}]
