@@ -5,8 +5,16 @@
             [bulb.utils :as u]))
 
 
-(defn view [{:keys [logo primary-button]}
-            {:keys [update-route]}]
+(defn cells
+  []
+  (for [i (range 434)]
+    {:date (str i "th April, 2020")
+     :colour (rand-nth [:colour-grey-four :colour-white-three])
+     :disabled? (rand-nth [false true])}))
+
+
+(defn view [{:keys []}
+            {:keys []}]
   (let [title "Title"
         subtitle "some long winded subtitle about this"]
     [:div
@@ -29,36 +37,15 @@
       [:div
        {:class (u/bem [:grid__cells])}
        (doall
-        (for [i (range 500)]
+        (for [{:keys [date colour disabled?]} (cells)]
           [:div
-           {:key i
-            :title (str i)
-            :class (u/bem [:grid__cells__cell :colour-grey-four])}]))
-       #_(doall
-        (for [{:keys [date label shaded? protected?]} (make-items (t/today))]
-          (let [add-checked-date (fn [] (re-frame/dispatch [:add-checked-date id date]))
-                remove-checked-date (fn [] (re-frame/dispatch [:remove-checked-date id date]))
-                checked? (contains? (set @!checked-dates) date)]
-            [:div
-             {:key date
-              :title label
-              :class (u/bem [:calendar__items__item
-                             (cond
-                               checked? colour
-                               shaded? :colour-grey-medium
-                               :else :colour-grey-light)])
-              :on-click (when-not protected?
-                          (if checked?
-                            remove-checked-date
-                            add-checked-date))}])))]
-
-      ]
+           {:key date
+            :title date
+            :class (u/bem [:grid__cells__cell colour (when disabled? :disabled)])
+            :on-click (when-not disabled? #(println "clicked" date))}]))]]
      [:div
       {:class (u/bem [:grid__footer])}]]))
 
 
 (defn grid []
-  [view
-   {:logo logo/logo
-    :primary-button button/primary-button}
-   {:update-route #(re-frame/dispatch [:update-route :home])}])
+  [view {} {}])

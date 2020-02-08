@@ -26,11 +26,16 @@
      :grid-auto-columns (-> c/filling :x-small px)
      :grid-auto-flow :column
      :grid-gap (-> c/spacing :xx-tiny px)}
+
     [:&__cell
      {:border-radius (-> c/radius :tiny px)
       :cursor :pointer}
+
      [:&--colour
-      (u/make-modifiers c/colour :background-color)]]]
+      (u/make-modifiers c/colour :background-color)]
+
+     [:&--disabled
+      {:cursor :default}]]]
 
    [:&__footer
     {:height (-> c/filling :xx-tiny px)
