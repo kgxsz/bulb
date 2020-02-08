@@ -16,16 +16,19 @@
      [:div
       {:class (u/bem [:page__body])}
       [:div
-       {:class (u/bem [:cell :width-cover :padding-top-xxx-large])}
+       {:class (u/bem [:cell :width-cover :margin-top-huge])}
        [profile]]
       [:div
-       {:class (u/bem [:cell :width-cover :padding-top-xxx-large])}
+       {:class (u/bem [:cell :width-cover :margin-top-huge])}
        [grid]]
       [:div
-       {:class (u/bem [:cell :width-cover :padding-top-xxx-large])}
+       {:class (u/bem [:cell :width-cover :margin-top-huge])}
        [grid]]
       [:div
-       {:class (u/bem [:cell :width-cover :padding-top-xxx-large])}
+       {:class (u/bem [:cell :width-cover :margin-top-huge])}
+       [grid]]
+      [:div
+       {:class (u/bem [:cell :width-cover :margin-top-huge])}
        [grid]]]
 
      [:div

@@ -29,7 +29,7 @@
 
    [:&__body
     {:margin :auto
-     :padding (-> c/spacing :x-small px)
+     :padding (-> c/spacing :medium px)
      :display :flex
      :flex-direction :column
      :align-items :center}
