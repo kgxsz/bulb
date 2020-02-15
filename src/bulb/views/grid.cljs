@@ -4,6 +4,8 @@
             [bulb.views.button :as button]
             [bulb.utils :as u]
             [cljs-time.core :as t]
+            [cljs-time.local :as t.local]
+            [cljs-time.coerce :as t.coerce]
             [cljs-time.format :as t.format]
             [cljs-time.periodic :as t.periodic]))
 
@@ -65,17 +67,17 @@
 
 
 (defn grid [i]
-  (let [!title (re-frame/subscribe [:title i])
-        !subtitle (re-frame/subscribe [:subtitle i])
-        !checked-dates (re-frame/subscribe [:checked-dates i])]
-    [view
-     {:title @!title
-      :subtitle @!subtitle
-      :cells (for [date dates]
-               {:date date
-                :colour (cond
-                          (contains? @!checked-dates (t.format/unparse basic-formatter date)) (colour i)
-                          (odd? (t/month date)) :colour-grey-four
-                          (even? (t/month date)) :colour-white-three)
-                :disabled? (t/before? date (t/minus- (last dates) (t/days 6)))})}
-     {:toggle-checked-date #(re-frame/dispatch [:toggle-checked-date i (t.format/unparse basic-formatter %)])}]))
+  (let [!grid (re-frame/subscribe [:grid i])]
+    (fn []
+      (let [{:keys [title subtitle checked-dates]} @!grid]
+        [view
+         {:title title
+          :subtitle subtitle
+          :cells (for [date dates]
+                   {:date date
+                    :colour (cond
+                              (contains? checked-dates (t.format/unparse basic-formatter date)) (colour i)
+                              (odd? (t/month date)) :colour-grey-four
+                              (even? (t/month date)) :colour-white-three)
+                    :disabled? (t/before? date (t/minus- (last dates) (t/days 6)))})}
+         {:toggle-checked-date #(re-frame/dispatch [:toggle-checked-date i (t.format/unparse basic-formatter %)])}]))))

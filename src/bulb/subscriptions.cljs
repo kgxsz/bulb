@@ -49,21 +49,9 @@
 
 
 (re-frame/reg-sub
- :title
- (fn [db [_ i]]
-   (get-in db [:grids (:current-user-id db) i :title])))
-
-
-(re-frame/reg-sub
- :subtitle
- (fn [db [_ i]]
-   (get-in db [:grids (:current-user-id db) i :subtitle])))
-
-
-(re-frame/reg-sub
- :checked-dates
- (fn [db [_ i]]
-   (get-in db [:grids (:current-user-id db) i :checked-dates])))
+ :grids
+ (fn [db [_]]
+   (get-in db [:grids (:current-user-id db)])))
 
 
 (re-frame/reg-sub

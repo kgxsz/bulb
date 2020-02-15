@@ -7,7 +7,7 @@
 
 (re-frame/reg-event-fx
  :initialise
- [interceptors/log interceptors/schema]
+ [interceptors/schema]
  (fn [{:keys [db]} event]
    {:db {}
     :initialise-routing {}}))
@@ -15,7 +15,7 @@
 
 (re-frame/reg-event-fx
  :route
- [interceptors/log interceptors/schema]
+ [interceptors/schema]
  (fn [{:keys [db]} [_ {:keys [route route-params query-params]}]]
    (let [db (-> db
                 (assoc :route route)
@@ -37,7 +37,7 @@
 
 (re-frame/reg-event-fx
  :query-success
- [interceptors/log interceptors/schema interceptors/current-user-id]
+ [interceptors/schema interceptors/current-user-id]
  (fn [{:keys [db]} [_ query response]]
    (case (-> query keys first)
      :authorisation-details (let [client-id (:client-id response)
@@ -59,7 +59,7 @@
 
 (re-frame/reg-event-fx
  :command-success
- [interceptors/log interceptors/schema interceptors/current-user-id]
+ [interceptors/schema interceptors/current-user-id]
  (fn [{:keys [db]} [_ command response]]
    (case (-> command keys first)
      :authorise {:db (assoc db :authorising? false)
@@ -78,7 +78,7 @@
 
 (re-frame/reg-event-fx
  :authorise
- [interceptors/log interceptors/schema]
+ [interceptors/schema]
  (fn [{:keys [db]} [_]]
    {:db (assoc db :authorising? true)
     :query {:authorisation-details {}}}))
@@ -86,7 +86,7 @@
 
 (re-frame/reg-event-fx
  :deauthorise
- [interceptors/log interceptors/schema]
+ [interceptors/schema]
  (fn [{:keys [db]} [_]]
    {:db (assoc db :deauthorising? true)
     :command {:deauthorise {}}}))
@@ -94,13 +94,17 @@
 
 (re-frame/reg-event-fx
  :update-route
- [interceptors/log interceptors/schema]
+ [interceptors/schema]
  (fn [{:keys [db]} [_ route]]
    {:update-route {:route route}}))
 
 
 (re-frame/reg-event-fx
  :toggle-checked-date
- [interceptors/log interceptors/schema]
- (fn [{:keys [db]} [_ i date]]
-   {:db db}))
+ [interceptors/schema]
+ (fn [{:keys [db]} [_ i checked-date]]
+   (let [path [:grids (:current-user-id db) i :checked-dates]
+         checked-dates (get-in db path)]
+     (if (contains? checked-dates checked-date)
+       {:db (update-in db path disj checked-date)}
+       {:db (update-in db path conj checked-date)}))))
