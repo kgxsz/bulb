@@ -45,4 +45,28 @@
 (re-frame/reg-sub
  :profile
  (fn [db [_]]
-   (get-in db [:profiles (:current-user-id db)])))
+   (get-in db [:profile (:current-user-id db)])))
+
+
+(re-frame/reg-sub
+ :title
+ (fn [db [_ i]]
+   (get-in db [:grids (:current-user-id db) i :title])))
+
+
+(re-frame/reg-sub
+ :subtitle
+ (fn [db [_ i]]
+   (get-in db [:grids (:current-user-id db) i :subtitle])))
+
+
+(re-frame/reg-sub
+ :checked-dates
+ (fn [db [_ i]]
+   (get-in db [:grids (:current-user-id db) i :checked-dates])))
+
+
+(re-frame/reg-sub
+ :grid
+ (fn [db [_ i]]
+   (get-in db [:grids (:current-user-id db) i])))

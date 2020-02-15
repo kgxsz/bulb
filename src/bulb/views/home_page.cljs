@@ -2,13 +2,13 @@
   (:require [re-frame.core :as re-frame]
             [bulb.views.logo :as logo]
             [bulb.views.profile :as profile]
-            [bulb.views.grid :as grid]
+            [bulb.views.grids :as grids]
             [bulb.views.button :as button]
             [bulb.utils :as u]))
 
 
 (defn view [{:keys [authorised? authorising?]}
-            {:keys [logo profile grid primary-button]}
+            {:keys [logo profile grids primary-button]}
             {:keys [authorise]}]
   [:div
    {:class (u/bem [:page])}
@@ -20,16 +20,7 @@
        [profile]]
       [:div
        {:class (u/bem [:cell :width-cover :margin-top-huge])}
-       [grid]]
-      [:div
-       {:class (u/bem [:cell :width-cover :margin-top-huge])}
-       [grid]]
-      [:div
-       {:class (u/bem [:cell :width-cover :margin-top-huge])}
-       [grid]]
-      [:div
-       {:class (u/bem [:cell :width-cover :margin-top-huge])}
-       [grid]]]
+       [grids]]]
 
      [:div
       {:class (u/bem [:page__body])}
@@ -55,7 +46,7 @@
        {:authorised? @!authorised?
         :authorising? @!authorising?}
        {:logo logo/logo
-        :profile  profile/profile
-        :grid grid/grid
+        :profile profile/profile
+        :grids grids/grids
         :primary-button button/primary-button}
        {:authorise #(re-frame/dispatch [:authorise])}])))

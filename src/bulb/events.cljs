@@ -23,7 +23,8 @@
                 (assoc :query-params query-params))]
      (case route
        :home {:db db
-              :query {:profile {}}}
+              :query {:profile {}
+                      :grids {}}}
        :grids {:db db
                :query {:profile {}
                        :grids {}}}
@@ -44,8 +45,8 @@
                                   path "login/oauth/authorize"
                                   query-params (gstring/format "client_id=%s" client-id)]
                               {:redirect {:url (gstring/format "%s/%s?%s" host path query-params)}})
-     :profile (when-let [profile (:profile response)]
-                {:db (assoc-in db [:profiles (:user-id profile)] profile)})
+     :profile {:db (merge db response)}
+     :grids {:db (merge db response)}
      {})))
 
 
@@ -97,3 +98,9 @@
  (fn [{:keys [db]} [_ route]]
    {:update-route {:route route}}))
 
+
+(re-frame/reg-event-fx
+ :toggle-checked-date
+ [interceptors/log interceptors/schema]
+ (fn [{:keys [db]} [_ i date]]
+   {:db db}))
