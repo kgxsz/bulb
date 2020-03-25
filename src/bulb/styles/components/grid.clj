@@ -20,6 +20,11 @@
    [:&__labels
     {:position :absolute
      :bottom 0}
+    [:&--horizontal
+     {:right 0
+      :display :flex
+      :flex-direction :row
+      :height 0}]
     [:&--vertical
      {:top 0
       :left 0
@@ -27,10 +32,12 @@
       :background-color (-> c/colour :white-one)}]]
 
    [:&__label
-    [:&--hidden
-     {:visibility :hidden}]
     [:&--horizontal
-     {:height (px (* 2 (+ (-> c/filling :x-small) (-> c/spacing :xx-tiny))))}]]
+     {:height (px (* 2 (+ (-> c/filling :x-small) (-> c/spacing :xx-tiny))))}]
+    [:&--vertical
+     {:width (px (+ (-> c/filling :x-small) (-> c/spacing :xx-tiny)))
+      :transform "rotate(-90deg)"
+      :transform-origin [[:left :top 0]]}]]
 
    [:&__cells
     {:position :absolute

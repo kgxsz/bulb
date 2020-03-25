@@ -24,6 +24,17 @@
      (t/days 1))))
 
 
+(def horizontal-labels
+  (let [today (t/today)]
+    (for [date (t.periodic/periodic-seq
+                (t/minus- today (t/days (+ 420 (t/day-of-week today))))
+                (t/plus- today (t/days (- 8 (t/day-of-week today))))
+                (t/weeks 1))]
+      {:date (t.format/unparse basic-formatter date)
+       :label (t.format/unparse month-label-formatter date)
+       :visible? (> 8 (t/day date))})))
+
+
 (defn colour [i]
   (let [colours [:colour-green-two
                  :colour-orange-two
@@ -62,6 +73,17 @@
           :title (t.format/unparse date-label-formatter date)
           :class (u/bem [:grid__cells__cell colour (when disabled? :disabled)])
           :on-click (when-not disabled? #(toggle-checked-date date))}]))]
+    [:div
+     {:class (u/bem [:grid__labels :horizontal])}
+     (doall
+      (for [{:keys [date label visible?]} horizontal-labels]
+        [:div
+         {:key date
+          :class (u/bem [:grid__label :vertical])}
+         (when visible?
+           [:div
+            {:class (u/bem [:text :font-size-xx-small :colour-grey-one])}
+            label])]))]
     [:div
      {:class (u/bem [:grid__labels :vertical])}
      (doall
