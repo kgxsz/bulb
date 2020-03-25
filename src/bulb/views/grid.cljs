@@ -61,7 +61,17 @@
          {:key date
           :title (t.format/unparse date-label-formatter date)
           :class (u/bem [:grid__cells__cell colour (when disabled? :disabled)])
-          :on-click (when-not disabled? #(toggle-checked-date date))}]))]]
+          :on-click (when-not disabled? #(toggle-checked-date date))}]))]
+    [:div
+     {:class (u/bem [:grid__labels :vertical])}
+     (doall
+      (for [label ["Mon" "Wed" "Fri" "Sun"]]
+        [:div
+         {:key label
+          :class (u/bem [:grid__label :horizontal])}
+         [:div
+          {:class (u/bem [:text :font-size-xx-small :colour-grey-one])}
+          label]]))]]
    [:div
     {:class (u/bem [:grid__footer])}]])
 

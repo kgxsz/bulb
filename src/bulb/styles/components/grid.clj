@@ -17,6 +17,21 @@
      :height (-> c/filling :x-huge px)
      :margin-top (-> c/spacing :x-large px)}]
 
+   [:&__labels
+    {:position :absolute
+     :bottom 0}
+    [:&--vertical
+     {:top 0
+      :left 0
+      :width (px (+ (c/filling :large) (c/filling :x-tiny)))
+      :background-color (-> c/colour :white-one)}]]
+
+   [:&__label
+    [:&--hidden
+     {:visibility :hidden}]
+    [:&--horizontal
+     {:height (px (* 2 (+ (-> c/filling :x-small) (-> c/spacing :xx-tiny))))}]]
+
    [:&__cells
     {:position :absolute
      :top 0
