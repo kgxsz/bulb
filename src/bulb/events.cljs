@@ -104,7 +104,7 @@
  [interceptors/schema]
  (fn [{:keys [db]} [_ i checked-date]]
    (let [path [:grids (:current-user-id db) i :checked-dates]
-         checked-dates (get-in db path)]
-     (if (contains? checked-dates checked-date)
-       {:db (update-in db path disj checked-date)}
-       {:db (update-in db path conj checked-date)}))))
+         checked-dates (get-in db path)
+         operation (if (contains? checked-dates checked-date) disj conj)]
+     {:db (update-in db path operation checked-date)
+      :command {:toggle-checked-date {:i i :checked-date checked-date}}})))
