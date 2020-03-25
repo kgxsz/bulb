@@ -1,5 +1,6 @@
 (ns bulb.styles.components.notification
   (:require [bulb.styles.constants :as c]
+            [bulb.styles.utils :as u]
             [garden.def :refer [defstyles]]
             [garden.units :refer [px percent ms vh vw]]))
 
@@ -30,4 +31,6 @@
      :border-color (:red-two c/colour)}]
 
    [:&--background
-    {:z-index -1}]])
+    {:display :none}
+    (u/tiny-width
+     {:display :flex})]])
