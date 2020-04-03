@@ -1,7 +1,7 @@
 (ns bulb.server
   (:require [ring.middleware.resource :as middleware]))
 
-;; TODO - use regular Ring patterns here
+
 (defn handler [request]
   (let [static-asset? (re-find #"^\/(js|css|images|fonts)\/.*" (:uri request))
         request (if static-asset?
