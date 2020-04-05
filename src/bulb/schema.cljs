@@ -28,14 +28,16 @@
 
 ;; Profile
 (s/def ::name string?)
-(s/def ::location string?)
+(s/def ::handle string?)
+(s/def ::location (s/nilable string?))
 (s/def ::created-at ::epoch)
-(s/def ::avatar string?)
-(s/def ::email (s/and string? (partial re-matches email)))
+(s/def ::avatar (s/nilable string?))
+(s/def ::email (s/nilable (s/and string? (partial re-matches email))))
 (s/def ::last-authorised ::epoch)
 (s/def ::profile (s/map-of ::user-id
                            (s/keys :req-un [::user-id
                                             ::name
+                                            ::handle
                                             ::location
                                             ::created-at
                                             ::avatar

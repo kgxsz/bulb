@@ -17,7 +17,7 @@
       {:class (u/bem [:profile__name])}
       [:div
        {:class (u/bem [:text :ellipsis :font-size-huge :font-weight-bold])}
-       (:name profile)]]
+       (or (:name profile) (:handle profile))]]
      [:div
       {:class (u/bem [:profile__divider])}]
      [light-button
